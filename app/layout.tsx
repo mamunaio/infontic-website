@@ -13,6 +13,14 @@ const outfit = Outfit({
   variable: "--font-outfit",
 });
 
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/category', label: 'Categories' },
+  { href: '/about', label: 'About' },
+  { href: '/search', label: 'Search' },
+];
+
 export const metadata: Metadata = {
   title: "Infontic - Blog & Reviews",
   description: "Your hub for the latest reviews, insights, and tech trends.",
@@ -28,21 +36,26 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${outfit.variable} antialiased bg-background text-foreground min-h-screen flex flex-col font-sans`}
       >
-        <header className="glass sticky top-0 z-50 transition-all duration-300">
+        <header className="glass sticky top-0 z-50 transition-all duration-300 border-b border-border/10 premium-shadow">
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-            <Link href="/" className="text-3xl font-bold font-outfit tracking-tight text-gradient">
+            <Link href="/" className="text-3xl font-bold font-outfit tracking-tight text-gradient hover:opacity-90 transition-opacity">
               Infontic
             </Link>
             <nav className="hidden md:flex gap-8 items-center font-medium">
-              <Link href="/" className="hover:text-primary transition-colors">Home</Link>
-              <Link href="/about" className="hover:text-primary transition-colors">About</Link>
-              <Link href="/search" className="hover:text-primary transition-colors">Search</Link>
-              <Link 
-                href="/studio" 
-                className="bg-primary text-primary-foreground px-5 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity"
-              >
-                Studio
-              </Link>
+              {navLinks.map((link) => (
+                <Link key={link.href} href={link.href} className="relative group hover:text-primary transition-colors py-2">
+                  {link.label}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                </Link>
+              ))}
+              {process.env.NODE_ENV === 'development' && (
+                <Link 
+                  href="/studio" 
+                  className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white px-6 py-2 rounded-full text-sm font-semibold hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300 transform hover:-translate-y-0.5"
+                >
+                  Studio
+                </Link>
+              )}
             </nav>
             {/* Mobile menu button could go here */}
           </div>

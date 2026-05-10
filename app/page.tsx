@@ -67,7 +67,7 @@ export default async function Home() {
               <h2 className="text-2xl font-bold font-outfit">Explore Categories</h2>
               <p className="text-muted-foreground text-sm">Find exactly what you&apos;re looking for</p>
             </div>
-            <Link href="/categories" className="text-sm font-bold text-primary hover:underline underline-offset-4">
+            <Link href="/category" className="text-sm font-bold text-primary hover:underline underline-offset-4">
               View All &rarr;
             </Link>
           </div>
